@@ -64,7 +64,7 @@ public class SubscriptionService {
             subscription.setTotalAmountPaid(updationAmount);
             subscriptionRepository.save(subscription);
         }
-        return updationAmount;
+        return updationAmount-previousAmount;
     }
 
     public Integer calculateTotalRevenueOfHotstar(){

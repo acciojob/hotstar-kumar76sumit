@@ -35,7 +35,7 @@ public class UserService {
         User user=userRepository.findById(userId).get();
         int totalWebSeries=0;
         for(WebSeries webSeries:webSeriesRepository.findAll()) {
-            if(user.getAge()<webSeries.getAgeLimit()) totalWebSeries++;
+            if(user.getAge()>=webSeries.getAgeLimit()) totalWebSeries++;
         }
         return totalWebSeries;
     }
