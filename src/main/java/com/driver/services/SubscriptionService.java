@@ -54,13 +54,15 @@ public class SubscriptionService {
         if(subscription.getSubscriptionType()==BASIC) {
             subscription.setSubscriptionType(PRO);
             int updationAmount=800+(250*subscription.getNoOfScreensSubscribed());
+            subscription.setTotalAmountPaid(updationAmount);
             subscriptionRepository.save(subscription);
             return updationAmount-previousAmount;
         } else if(subscription.getSubscriptionType()==PRO) {
             subscription.setSubscriptionType(ELITE);
             int updationAmount=1000+(350*subscription.getNoOfScreensSubscribed());
+            subscription.setTotalAmountPaid(updationAmount);
             subscriptionRepository.save(subscription);
-            return updationAmount-previousAmount;
+            return updationAmount;
         } else throw new Exception("Already the best Subscription");
     }
 
