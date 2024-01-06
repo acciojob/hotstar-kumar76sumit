@@ -39,8 +39,11 @@ public class SubscriptionService {
         else totalAmount=1000+(350*numberOfScreens);
 
         subscription.setTotalAmountPaid(totalAmount);
-        subscription.setUser(userRepository.findById(subscriptionEntryDto.getUserId()).get());
+        User user=userRepository.findById(subscriptionEntryDto.getUserId()).get();
+        subscription.setUser(user);
         subscriptionRepository.save(subscription);
+        user.setSubscription(subscription);
+        userRepository.save(user);
         return totalAmount;
     }
 
@@ -59,7 +62,7 @@ public class SubscriptionService {
             updationAmount=800+(250*subscription.getNoOfScreensSubscribed());
             subscription.setTotalAmountPaid(updationAmount);
             subscriptionRepository.save(subscription);
-        } else if(subscription.getSubscriptionType().equals(PRO)) {
+        } else {
             subscription.setSubscriptionType(ELITE);
             updationAmount=1000+(350*subscription.getNoOfScreensSubscribed());
             subscription.setTotalAmountPaid(updationAmount);
@@ -78,5 +81,4 @@ public class SubscriptionService {
         }
         return totalRevenue;
     }
-
 }
